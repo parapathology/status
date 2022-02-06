@@ -2,22 +2,13 @@
 title: "GitHub Dashboard"
 output: github_document
 # provide user name to include all public, non-fork repos from the owner
-all_by_owner: gadenbuie
+all_by_owner: parapathology
 # the repository where this repo exists
-status_repo: gadenbuie/status
+status_repo: parapathology/status
 # list of repositories by owner name and repo (appear before owner's repos)
 repos:
-  gadenbuie:
-  - xaringanthemer
-  - xaringanExtra
-  - starwarsdb
-  - metathis
-  - shrtcts
-  - js4shiny
-  rstudio-education:
-  - gradethis
-  rstudio:
-  - learnr
+  parapathology:
+  - parapathology.github.io
 ---
 
 ![](https://github.com/`r rmarkdown::metadata$status_repo`/workflows/Render%20Status/badge.svg)  
@@ -66,10 +57,10 @@ repos %>%
   knitr::kable(escape = FALSE)
 ```
 
-```{r eval=has_repos_without_actions, results="asis"}
+```{r repos without acitons, results="asis"}
 cat("## Repos without Github Actions")
 
-repos %>% 
+repos %>%
   select_if(negate(is.list)) %>%
   filter(is.na(badge_url)) %>%
   transmute(
@@ -78,7 +69,22 @@ repos %>%
     Subscribers = subscribers_count,
     Issues = open_issues_count,
     Forks = forks_count
-  ) %>% 
+  ) %>%
   knitr::kable(escape = FALSE)
 ```
 
+
+```{r get gh_forks}
+source("gh-forks.R")
+```
+
+
+```{r print forked repos, results="asis"}
+cat("## Forked Repos")
+
+forked_repos_df %>%
+  transmute(
+    Repo = glue("[{name}]({html_url})")
+  ) %>%
+  knitr::kable(escape = FALSE)
+```
