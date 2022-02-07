@@ -74,12 +74,13 @@ repos %>%
 ```
 
 
-```{r get gh_forks}
+```{r get forks}
 source("gh-forks.R")
+
 ```
 
 
-```{r print forked repos, results="asis"}
+```{r forked repos, eval=anyforkedrepo, results="asis"}
 cat("## Forked Repos")
 
 forked_repos_df %>%
@@ -88,3 +89,4 @@ forked_repos_df %>%
   ) %>%
   knitr::kable(escape = FALSE)
 ```
+

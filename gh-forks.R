@@ -41,6 +41,7 @@ forked_repos <-
 forked_repos_df <- forked_repos %>%
   select(name, html_url)
 
+anyforkedrepo <- dim(forked_repos_df)[1] > 0
 
 
 # forked_repos_name <- forked_repos[["name"]]
