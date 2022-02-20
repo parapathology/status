@@ -7,7 +7,9 @@ on:
     # daily in the morning for America/New_York (hours in UTC)
     # - cron: '0 12 * * *'
     # At 01:00 on Sunday
-    - cron: '0 1 * * 0'
+    # - cron: '0 1 * * 0'
+    # Crontab First Day of Every Month
+    - cron: '0 0 1 * *'
   repository_dispatch:
     # for use with peter-evans/repository_dispatch@v1
     types: ['status-update']
